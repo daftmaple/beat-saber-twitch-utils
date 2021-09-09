@@ -22,8 +22,6 @@ const TTS = () => {
 
   return (
     <div>
-      {config.channel}
-      {config.language}
       <TtsComponent channel={config.channel} />
     </div>
   );

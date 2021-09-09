@@ -21,7 +21,7 @@ export const TtsComponent = (props: Props): ReactElement<Props> => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [channel]);
 
-  useLinker({ client });
+  useLinker({ enabled, client });
 
   return (
     <>

@@ -5,6 +5,7 @@ import { useMessageQueue } from './queue';
 import { useSpeech } from './speech';
 
 interface Props {
+  enabled: boolean;
   client: TwitchChat;
 }
 
@@ -12,12 +13,21 @@ interface Props {
  * This linker links between queue, speech, and the twitch connections
  */
 export const useLinker = (props: Props) => {
-  const { client } = props;
+  const { enabled, client } = props;
   const queue = useMessageQueue();
   const speech = useSpeech();
 
   const triggerSpeech = useCallback(() => {
-    if (queue.countMessages() > 0 && !speech.currentSpeech) {
+    /**
+     * Speech is only triggered when:
+     * - TTS is enabled on the enabled props (currently as a button)
+     * - Queue has a message
+     * - There is no currently running speech
+     *
+     * This hook runs as a callback since it is passed to speech hook
+     * which then invoked on message end
+     */
+    if (enabled && queue.countMessages() > 0 && !speech.currentSpeech) {
       const messageToSpeak = queue.popMessage();
       if (messageToSpeak) {
         speech.setCurrentSpeech({
@@ -26,7 +36,7 @@ export const useLinker = (props: Props) => {
         });
       }
     }
-  }, [queue, speech]);
+  }, [enabled, queue, speech]);
 
   useEffect(() => {
     speech.setEndCallback(triggerSpeech);
