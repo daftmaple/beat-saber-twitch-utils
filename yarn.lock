@@ -446,6 +446,11 @@
   resolved "https://registry.yarnpkg.com/@types/scheduler/-/scheduler-0.16.1.tgz#18845205e86ff0038517aab7a18a62a6b9f71275"
   integrity sha512-EaCxbanVeyxDRTQBkdLb3Bvl/HK7PBK6UJjsSixB0iHKoWxE5uu2Q/DgtpOhPIojN0Zl1whvOd7PoHs2P0s5eA==
 
+"@types/tmi.js@1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@types/tmi.js/-/tmi.js-1.7.2.tgz#fd4326730efce8aa6bc105115c65863acbad3901"
+  integrity sha512-muB6KaYj40VQlE+oQNy0BP8x4nY4+nc5yEitSGhgdMazLNkIWBqcdlO13/tSDe/MZtIidQrl4HI/uQKHfOdtIw==
+
 "@typescript-eslint/eslint-plugin@4.29.3":
   version "4.29.3"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-4.29.3.tgz#95cb8029a8bd8bd9c7f4ab95074a7cb2115adefa"
@@ -3051,6 +3056,11 @@ node-fetch@2.6.1:
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
   integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
 
+node-fetch@^2.6.1:
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.2.tgz#986996818b73785e47b1965cc34eb093a1d464d0"
+  integrity sha512-aLoxToI6RfZ+0NOjmWAgn9+LEd30YCkJKFSyWacNZdEKTit/ZMcKjGkTRo8uWEsnIb/hfKecNPEbln02PdWbcA==
+
 node-html-parser@1.4.9:
   version "1.4.9"
   resolved "https://registry.yarnpkg.com/node-html-parser/-/node-html-parser-1.4.9.tgz#3c8f6cac46479fae5800725edb532e9ae8fd816c"
@@ -4256,6 +4266,14 @@ timers-browserify@2.0.12, timers-browserify@^2.0.4:
   dependencies:
     setimmediate "^1.0.4"
 
+tmi.js@1.8.5:
+  version "1.8.5"
+  resolved "https://registry.yarnpkg.com/tmi.js/-/tmi.js-1.8.5.tgz#8298821677599f163af075113f5d1bd51a648087"
+  integrity sha512-A9qrydfe1e0VWM9MViVhhxVgvLpnk7pFShVUWePsSTtoi+A1X+Zjdoa7OJd7/YsgHXGj3GkNEvnWop/1WwZuew==
+  dependencies:
+    node-fetch "^2.6.1"
+    ws "^8.2.0"
+
 tmp@^0.0.33:
   version "0.0.33"
   resolved "https://registry.yarnpkg.com/tmp/-/tmp-0.0.33.tgz#6d34335889768d21b2bcda0aa277ced3b1bfadf9"
@@ -4576,6 +4594,11 @@ wrappy@1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
   integrity sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
+
+ws@^8.2.0:
+  version "8.2.1"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.2.1.tgz#bdd92b3c56fdb47d2379b5ae534281922cc5bd12"
+  integrity sha512-XkgWpJU3sHU7gX8f13NqTn6KQ85bd1WU7noBHTT8fSohx7OS1TPY8k+cyRPCzFkia7C4mM229yeHr1qK9sM4JQ==
 
 xtend@^4.0.0, xtend@^4.0.2:
   version "4.0.2"
