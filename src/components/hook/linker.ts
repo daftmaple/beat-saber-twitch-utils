@@ -34,7 +34,8 @@ export const useLinker = (props: Props) => {
 
   const messageHandler = useCallback<TmiHandlerType<TmiMessage>>(
     (payload) => {
-      if (payload) {
+      // If payload exists and message doesn't start with command trigger, speak the message
+      if (payload && !payload.message.startsWith(`!`)) {
         queue.addMessage({
           message: payload.message,
           username: payload.username,
