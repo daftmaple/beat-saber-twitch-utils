@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 /**
  * Template for choosing speech
@@ -24,7 +24,7 @@ type SpeakParam = {
 };
 
 export const useSpeech = () => {
-  const [_currentSpeech, setCurrentSpeech] = useState<SpeakParam | null>(null);
+  const [currentSpeech, setCurrentSpeech] = useState<SpeakParam | null>(null);
   const [canSpeak, setCanSpeak] = useState<boolean>(false);
   const [speech, setSpeech] = useState<SpeechSynthesisVoice[]>([]);
   const [endCallback, setEndCallback] = useState<(() => void) | null>(null);
@@ -41,24 +41,31 @@ export const useSpeech = () => {
     }
   }, []);
 
-  const onSpeechEnd = () => {
+  const onSpeechEnd = useCallback(() => {
     setCurrentSpeech(null);
     endCallback?.();
-  };
+  }, [endCallback]);
 
-  const speak = (arg: SpeakParam) => {
-    if (canSpeak) {
-      const text = `${arg.username} said: ${arg.message}`;
-      const utterance = new window.SpeechSynthesisUtterance(text);
-      utterance.onend = onSpeechEnd;
-      setCurrentSpeech(arg);
-      window.speechSynthesis.speak(utterance);
-    }
-  };
+  const speak = useCallback(
+    (arg: SpeakParam) => {
+      if (canSpeak) {
+        const text = `${arg.username} said: ${arg.message}`;
+        const utterance = new window.SpeechSynthesisUtterance(text);
+        utterance.onend = onSpeechEnd;
+        setCurrentSpeech(arg);
+        window.speechSynthesis.speak(utterance);
+      }
+    },
+    [canSpeak, onSpeechEnd],
+  );
 
-  return {
-    speech,
-    speak,
-    setEndCallback,
-  };
+  return useMemo(
+    () => ({
+      currentSpeech,
+      speech,
+      speak,
+      setEndCallback,
+    }),
+    [currentSpeech, speech, speak],
+  );
 };

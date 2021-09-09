@@ -6,7 +6,7 @@ type ChatMessage = {
   'msg-id': string;
 };
 
-export function useMessageQueue() {
+export const useMessageQueue = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
 
   const actions = useMemo(
@@ -27,13 +27,10 @@ export function useMessageQueue() {
           previousMessages.filter((message) => message[`msg-id`] !== id),
         );
       },
-      popMessage(): Promise<ChatMessage | undefined> {
-        return new Promise((resolve) => {
-          setMessages(([newestMessage, ...previousMessages]) => {
-            resolve(newestMessage);
-            return [...previousMessages];
-          });
-        });
+      popMessage(): ChatMessage | undefined {
+        const [newestMessage, ...previousMessages] = messages;
+        setMessages(previousMessages);
+        return newestMessage;
       },
       countMessages() {
         return messages.length;
@@ -43,4 +40,4 @@ export function useMessageQueue() {
   );
 
   return actions;
-}
+};

@@ -18,7 +18,8 @@ export const TtsComponent = (props: Props): ReactElement<Props> => {
       client.disconnect();
       setClient(new TwitchChat(channel));
     };
-  }, [channel, client]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [channel]);
 
   useLinker({ client });
 

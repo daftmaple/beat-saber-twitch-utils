@@ -16,9 +16,9 @@ export const useLinker = (props: Props) => {
   const queue = useMessageQueue();
   const speech = useSpeech();
 
-  const triggerSpeech = useCallback(async () => {
-    if (queue.countMessages() > 0) {
-      const messageToSpeak = await queue.popMessage();
+  const triggerSpeech = useCallback(() => {
+    if (queue.countMessages() > 0 && !speech.currentSpeech) {
+      const messageToSpeak = queue.popMessage();
       if (messageToSpeak) {
         speech.speak({
           message: messageToSpeak.message,
@@ -28,9 +28,9 @@ export const useLinker = (props: Props) => {
     }
   }, [queue, speech]);
 
-  // useEffect(() => {
-  //   speech.setEndCallback(triggerSpeech);
-  // }, [speech, triggerSpeech]);
+  useEffect(() => {
+    speech.setEndCallback(triggerSpeech);
+  }, [speech, triggerSpeech]);
 
   const messageHandler = useCallback<TmiHandlerType<TmiMessage>>(
     (payload) => {
@@ -40,10 +40,9 @@ export const useLinker = (props: Props) => {
           username: payload.username,
           'msg-id': payload[`msg-id`],
         });
-        triggerSpeech();
       }
     },
-    [queue, triggerSpeech],
+    [queue],
   );
 
   useEffect(() => {
