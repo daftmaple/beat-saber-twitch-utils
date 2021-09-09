@@ -26,12 +26,12 @@ type SpeakParam = {
 export const useSpeech = () => {
   const [currentSpeech, setCurrentSpeech] = useState<SpeakParam | null>(null);
   const [canSpeak, setCanSpeak] = useState<boolean>(false);
-  const [speech, setSpeech] = useState<SpeechSynthesisVoice[]>([]);
+  const [speechVoices, setSpeechVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [endCallback, setEndCallback] = useState<(() => void) | null>(null);
 
   const getSpeeches = async () => {
     const windowSpeech = await getWindowSpeech();
-    setSpeech(windowSpeech);
+    setSpeechVoices(windowSpeech);
   };
 
   useEffect(() => {
@@ -46,26 +46,19 @@ export const useSpeech = () => {
     endCallback?.();
   }, [endCallback]);
 
-  const speak = useCallback(
-    (arg: SpeakParam) => {
-      if (canSpeak) {
-        const text = `${arg.username} said: ${arg.message}`;
-        const utterance = new window.SpeechSynthesisUtterance(text);
-        utterance.onend = onSpeechEnd;
-        setCurrentSpeech(arg);
-        window.speechSynthesis.speak(utterance);
-      }
-    },
-    [canSpeak, onSpeechEnd],
-  );
+  useEffect(() => {
+    if (canSpeak && currentSpeech) {
+      const text = `${currentSpeech.username} said: ${currentSpeech.message}`;
+      const utterance = new window.SpeechSynthesisUtterance(text);
+      utterance.onend = onSpeechEnd;
+      window.speechSynthesis.speak(utterance);
+    }
+  }, [canSpeak, currentSpeech, onSpeechEnd]);
 
-  return useMemo(
-    () => ({
-      currentSpeech,
-      speech,
-      speak,
-      setEndCallback,
-    }),
-    [currentSpeech, speech, speak],
-  );
+  return {
+    currentSpeech,
+    setCurrentSpeech,
+    speechVoices,
+    setEndCallback,
+  };
 };

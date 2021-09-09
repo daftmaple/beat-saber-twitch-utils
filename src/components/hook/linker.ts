@@ -20,7 +20,7 @@ export const useLinker = (props: Props) => {
     if (queue.countMessages() > 0 && !speech.currentSpeech) {
       const messageToSpeak = queue.popMessage();
       if (messageToSpeak) {
-        speech.speak({
+        speech.setCurrentSpeech({
           message: messageToSpeak.message,
           username: messageToSpeak.username,
         });
