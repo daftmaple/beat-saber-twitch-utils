@@ -2,14 +2,9 @@ import { ChatUserstate, Events } from 'tmi.js';
 
 import { Transformable } from './transformable';
 
-type Message = {
-  channel: string;
-  username: string;
-  message: string;
-  'msg-id': string;
-};
+import { Message } from '~/types';
 
-export class TmiMessage extends Transformable<Message> {
+export class TmiMessage implements Transformable<Message> {
   channel: string;
 
   userstate: ChatUserstate;
@@ -19,7 +14,6 @@ export class TmiMessage extends Transformable<Message> {
   self: boolean;
 
   constructor(...args: Parameters<Events['message']>) {
-    super();
     const [channel, userstate, message, self] = args;
     this.channel = channel;
     this.userstate = userstate;

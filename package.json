@@ -1,7 +1,7 @@
 {
   "name": "twitch-chat",
   "description": "Twitch Chat utilities",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "author": "daftmaple",
   "scripts": {
@@ -10,6 +10,7 @@
     "export": "next export",
     "start": "next start",
     "type-check": "tsc",
+    "type-check:watch": "tsc --watch",
     "lint": "eslint --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\"",
     "format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\" --write",
     "postinstall": "husky install",

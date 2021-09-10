@@ -21,6 +21,7 @@ const getWindowSpeech = (): Promise<SpeechSynthesisVoice[]> =>
 type SpeakParam = {
   username: string;
   message: string;
+  'msg-id': string;
 };
 
 export const useSpeech = () => {
@@ -55,9 +56,19 @@ export const useSpeech = () => {
     }
   }, [canSpeak, currentSpeech, onSpeechEnd]);
 
+  /**
+   * This method stops any currently playing speech. Note that this method does not
+   * set the currentSpeech state to null directly (it is set to null on utterance end),
+   * hence method may be used by other component or hook by checking currentSpeech state.
+   */
+  const cancelCurrentSpeech = useCallback(() => {
+    window.speechSynthesis.cancel();
+  }, []);
+
   return {
     currentSpeech,
     setCurrentSpeech,
+    cancelCurrentSpeech,
     speechVoices,
     setEndCallback,
   };
