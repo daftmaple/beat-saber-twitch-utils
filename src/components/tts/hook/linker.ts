@@ -18,7 +18,7 @@ interface Props {
  */
 export const useLinker = (props: Props) => {
   const { enabled, client } = props;
-  const queue = useMessageQueue();
+  const [messageQueue, messageQueueActions] = useMessageQueue();
   const speech = useSpeech();
 
   const triggerSpeech = useCallback(() => {
@@ -31,8 +31,12 @@ export const useLinker = (props: Props) => {
      * This hook runs as a callback since it is passed to speech hook
      * which then invoked on message end
      */
-    if (enabled && queue.countMessages() > 0 && !speech.currentSpeech) {
-      const messageToSpeak = queue.popMessage();
+    if (
+      enabled &&
+      messageQueueActions.countMessages() > 0 &&
+      !speech.currentSpeech
+    ) {
+      const messageToSpeak = messageQueueActions.popMessage();
       if (messageToSpeak) {
         speech.setCurrentSpeech({
           message: messageToSpeak.message,
@@ -40,7 +44,7 @@ export const useLinker = (props: Props) => {
         });
       }
     }
-  }, [enabled, queue, speech]);
+  }, [enabled, messageQueueActions, speech]);
 
   useEffect(() => {
     speech.setEndCallback(triggerSpeech);
@@ -50,41 +54,41 @@ export const useLinker = (props: Props) => {
     (payload) => {
       // If payload exists and message doesn't start with command trigger, speak the message
       if (payload && !payload.message.startsWith(`!`)) {
-        queue.addMessage({
+        messageQueue.addMessage({
           message: payload.message,
           username: payload.username,
           'msg-id': payload[`msg-id`],
         });
       }
     },
-    [queue],
+    [messageQueue],
   );
 
   const userFilterHandler = useCallback<CallbackHandler<Ban>>(
     (payload) => {
       if (payload) {
-        queue.clearUserMessage(payload.username);
+        messageQueue.clearUserMessage(payload.username);
       }
     },
-    [queue],
+    [messageQueue],
   );
 
   const clearChatHandler = useCallback<CallbackHandler<ClearChat>>(
     (payload) => {
       if (payload) {
-        queue.clearMessages();
+        messageQueue.clearMessages();
       }
     },
-    [queue],
+    [messageQueue],
   );
 
   const messageDeletedHandler = useCallback<CallbackHandler<MessageDeleted>>(
     (payload) => {
       if (payload) {
-        queue.deleteMessage(payload[`msg-id`]);
+        messageQueue.deleteMessage(payload[`msg-id`]);
       }
     },
-    [queue],
+    [messageQueue],
   );
 
   useEffect(() => {

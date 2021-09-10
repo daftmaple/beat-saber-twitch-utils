@@ -6,10 +6,22 @@ type ChatMessage = {
   'msg-id': string;
 };
 
-export const useMessageQueue = () => {
+type Actions = {
+  addMessage(newMessage: ChatMessage): void;
+  clearUserMessage(username: string): void;
+  clearMessages(): void;
+  deleteMessage(id: string): void;
+};
+
+type MessageActions = {
+  popMessage(): ChatMessage | undefined;
+  countMessages(): number;
+};
+
+export const useMessageQueue = (): [Actions, MessageActions] => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
 
-  const actions = useMemo(
+  const actions = useMemo<Actions>(
     () => ({
       addMessage(newMessage: ChatMessage) {
         setMessages((previousMessages) => [...previousMessages, newMessage]);
@@ -27,6 +39,12 @@ export const useMessageQueue = () => {
           previousMessages.filter((message) => message[`msg-id`] !== id),
         );
       },
+    }),
+    [],
+  );
+
+  const messageActions = useMemo<MessageActions>(
+    () => ({
       popMessage(): ChatMessage | undefined {
         const [newestMessage, ...previousMessages] = messages;
         setMessages(previousMessages);
@@ -39,5 +57,5 @@ export const useMessageQueue = () => {
     [messages],
   );
 
-  return actions;
+  return [actions, messageActions];
 };
