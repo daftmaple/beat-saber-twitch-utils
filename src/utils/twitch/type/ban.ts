@@ -4,7 +4,7 @@ import { Transformable } from './transformable';
 
 import { Ban } from '~/types';
 
-export class TmiBan extends Transformable<Ban> {
+export class TmiBan implements Transformable<Ban> {
   channel: string;
 
   username: string;
@@ -12,7 +12,6 @@ export class TmiBan extends Transformable<Ban> {
   reason: string;
 
   constructor(...args: Parameters<Events['ban']>) {
-    super();
     const [channel, username, reason] = args;
     this.channel = channel;
     this.username = username;

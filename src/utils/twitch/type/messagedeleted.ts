@@ -4,7 +4,7 @@ import { Transformable } from './transformable';
 
 import { MessageDeleted } from '~/types';
 
-export class TmiMessageDeleted extends Transformable<MessageDeleted> {
+export class TmiMessageDeleted implements Transformable<MessageDeleted> {
   channel: string;
 
   username: string;
@@ -14,7 +14,6 @@ export class TmiMessageDeleted extends Transformable<MessageDeleted> {
   userstate: DeleteUserstate;
 
   constructor(...args: Parameters<Events['messagedeleted']>) {
-    super();
     const [channel, username, deletedMessage, userstate] = args;
     this.channel = channel;
     this.username = username;
