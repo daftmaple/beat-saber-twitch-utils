@@ -3,7 +3,7 @@ import { useCallback, useEffect } from 'react';
 import { useMessageQueue } from './queue';
 import { useSpeech } from './speech';
 
-import { Message, Ban } from '~/types';
+import { Message, Ban, ClearChat, MessageDeleted } from '~/types';
 import { TwitchChat } from '~/utils/twitch';
 
 type CallbackHandler<T> = (arg: T | null) => void;
@@ -69,9 +69,35 @@ export const useLinker = (props: Props) => {
     [queue],
   );
 
+  const clearChatHandler = useCallback<CallbackHandler<ClearChat>>(
+    (payload) => {
+      if (payload) {
+        queue.clearMessages();
+      }
+    },
+    [queue],
+  );
+
+  const messageDeletedHandler = useCallback<CallbackHandler<MessageDeleted>>(
+    (payload) => {
+      if (payload) {
+        queue.deleteMessage(payload[`msg-id`]);
+      }
+    },
+    [queue],
+  );
+
   useEffect(() => {
     client.registerMessageHandler(messageHandler);
     client.registerTimeoutHandler(userFilterHandler);
     client.registerBanHandler(userFilterHandler);
-  }, [client, messageHandler, userFilterHandler]);
+    client.registerClearChatHandler(clearChatHandler);
+    client.registerMessageDeletedHandler(messageDeletedHandler);
+  }, [
+    clearChatHandler,
+    client,
+    messageDeletedHandler,
+    messageHandler,
+    userFilterHandler,
+  ]);
 };
