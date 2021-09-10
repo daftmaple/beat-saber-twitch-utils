@@ -1,4 +1,5 @@
 import { Events } from 'tmi.js';
+
 import { Transformable } from './transformable';
 
 type ClearChat = {

@@ -1,8 +1,8 @@
 import ErrorPage from 'next/error';
-
 import { useRouter } from 'next/router';
-import { queryHandler } from '~/utils/tts/query';
+
 import { TtsComponent } from '~/components';
+import { queryHandler } from '~/utils/tts/query';
 
 /**
  * TTS Page
