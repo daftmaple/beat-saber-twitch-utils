@@ -2,11 +2,7 @@ import { Events } from 'tmi.js';
 
 import { Transformable } from './transformable';
 
-type Ban = {
-  channel: string;
-  username: string;
-  reason: string;
-};
+import { Ban } from '~/types';
 
 export class TmiBan extends Transformable<Ban> {
   channel: string;

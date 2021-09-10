@@ -2,12 +2,7 @@ import { ChatUserstate, Events } from 'tmi.js';
 
 import { Transformable } from './transformable';
 
-type Message = {
-  channel: string;
-  username: string;
-  message: string;
-  'msg-id': string;
-};
+import { Message } from '~/types';
 
 export class TmiMessage extends Transformable<Message> {
   channel: string;

@@ -2,11 +2,7 @@ import { DeleteUserstate, Events } from 'tmi.js';
 
 import { Transformable } from './transformable';
 
-type MessageDeleted = {
-  channel: string;
-  username: string;
-  'msg-id': string;
-};
+import { MessageDeleted } from '~/types';
 
 export class TmiMessageDeleted extends Transformable<MessageDeleted> {
   channel: string;

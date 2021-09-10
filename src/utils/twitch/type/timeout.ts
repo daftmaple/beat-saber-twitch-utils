@@ -2,12 +2,7 @@ import { Events } from 'tmi.js';
 
 import { Transformable } from './transformable';
 
-type Timeout = {
-  channel: string;
-  username: string;
-  reason: string;
-  duration: number;
-};
+import { Timeout } from '~/types';
 
 export class TmiTimeout extends Transformable<Timeout> {
   channel: string;

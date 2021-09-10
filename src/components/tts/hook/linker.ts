@@ -3,8 +3,10 @@ import { useCallback, useEffect } from 'react';
 import { useMessageQueue } from './queue';
 import { useSpeech } from './speech';
 
-import { TmiHandlerType, TwitchChat } from '~/utils/twitch';
-import { TmiMessage } from '~/utils/twitch/type';
+import { Message, Ban } from '~/types';
+import { TwitchChat } from '~/utils/twitch';
+
+type CallbackHandler<T> = (arg: T | null) => void;
 
 interface Props {
   enabled: boolean;
@@ -44,7 +46,7 @@ export const useLinker = (props: Props) => {
     speech.setEndCallback(triggerSpeech);
   }, [speech, triggerSpeech]);
 
-  const messageHandler = useCallback<TmiHandlerType<TmiMessage>>(
+  const messageHandler = useCallback<CallbackHandler<Message>>(
     (payload) => {
       // If payload exists and message doesn't start with command trigger, speak the message
       if (payload && !payload.message.startsWith(`!`)) {
@@ -58,7 +60,18 @@ export const useLinker = (props: Props) => {
     [queue],
   );
 
+  const userFilterHandler = useCallback<CallbackHandler<Ban>>(
+    (payload) => {
+      if (payload) {
+        queue.clearUserMessage(payload.username);
+      }
+    },
+    [queue],
+  );
+
   useEffect(() => {
     client.registerMessageHandler(messageHandler);
-  }, [client, messageHandler]);
+    client.registerTimeoutHandler(userFilterHandler);
+    client.registerBanHandler(userFilterHandler);
+  }, [client, messageHandler, userFilterHandler]);
 };

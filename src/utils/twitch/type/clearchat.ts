@@ -2,9 +2,7 @@ import { Events } from 'tmi.js';
 
 import { Transformable } from './transformable';
 
-type ClearChat = {
-  channel: string;
-};
+import { ClearChat } from '~/types';
 
 export class TmiClearChat extends Transformable<ClearChat> {
   channel: string;
