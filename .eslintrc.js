@@ -40,6 +40,16 @@ module.exports = {
         jsx: 'never',
       },
     ],
+    'import/order': [
+      'error',
+      {
+        'newlines-between': 'always',
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: false,
+        },
+      },
+    ],
     quotes: 'off',
     'jsx-a11y/anchor-is-valid': [
       'error',

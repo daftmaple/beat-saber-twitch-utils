@@ -1,6 +1,8 @@
 import { ReactElement, useEffect, useState } from 'react';
-import { TwitchChat } from '~/utils/twitch';
+
 import { useLinker } from './hook/linker';
+
+import { TwitchChat } from '~/utils/twitch';
 
 interface Props {
   channel: string;

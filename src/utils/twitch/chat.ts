@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import { Client } from 'tmi.js';
+
 import {
   TmiMessageDeleted,
   TmiMessage,

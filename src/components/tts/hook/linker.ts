@@ -1,8 +1,10 @@
 import { useCallback, useEffect } from 'react';
-import { TmiHandlerType, TwitchChat } from '~/utils/twitch';
-import { TmiMessage } from '~/utils/twitch/type';
+
 import { useMessageQueue } from './queue';
 import { useSpeech } from './speech';
+
+import { TmiHandlerType, TwitchChat } from '~/utils/twitch';
+import { TmiMessage } from '~/utils/twitch/type';
 
 interface Props {
   enabled: boolean;

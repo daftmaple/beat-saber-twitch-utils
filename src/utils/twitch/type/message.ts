@@ -1,4 +1,5 @@
 import { ChatUserstate, Events } from 'tmi.js';
+
 import { Transformable } from './transformable';
 
 type Message = {
