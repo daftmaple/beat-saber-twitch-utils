@@ -18,13 +18,18 @@ const getWindowSpeech = (): Promise<SpeechSynthesisVoice[]> =>
     window.speechSynthesis.addEventListener(`voiceschanged`, listener);
   });
 
+interface Props {
+  volume: number;
+}
+
 type SpeakParam = {
   username: string;
   message: string;
   'msg-id': string;
 };
 
-export const useSpeech = () => {
+export const useSpeech = (props: Props) => {
+  const { volume } = props;
   const [currentSpeech, setCurrentSpeech] = useState<SpeakParam | null>(null);
   const [canSpeak, setCanSpeak] = useState<boolean>(false);
   const [speechVoices, setSpeechVoices] = useState<SpeechSynthesisVoice[]>([]);
@@ -47,13 +52,20 @@ export const useSpeech = () => {
     endCallback?.();
   }, [endCallback]);
 
+  /**
+   * Listens to update on currentSpeech state
+   * Volume is not added to useEffect dependency since volume updates should not
+   * trigger speech. This logic should probably be cleaned in the future.
+   */
   useEffect(() => {
     if (canSpeak && currentSpeech) {
       const text = `${currentSpeech.username} said: ${currentSpeech.message}`;
       const utterance = new window.SpeechSynthesisUtterance(text);
+      utterance.volume = volume;
       utterance.onend = onSpeechEnd;
       window.speechSynthesis.speak(utterance);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [canSpeak, currentSpeech, onSpeechEnd]);
 
   /**

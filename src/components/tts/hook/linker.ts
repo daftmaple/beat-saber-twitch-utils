@@ -11,20 +11,21 @@ type CallbackHandler<T> = (arg: T | null) => void;
 interface Props {
   enabled: boolean;
   client: TwitchChat;
+  volume: number;
 }
 
 /**
  * This linker links between queue, speech, and the twitch connections
  */
 export const useLinker = (props: Props) => {
-  const { enabled, client } = props;
+  const { enabled, client, volume } = props;
   const [messageQueue, messageQueueActions] = useMessageQueue();
   const {
     currentSpeech,
     setCurrentSpeech,
     setEndCallback,
     cancelCurrentSpeech,
-  } = useSpeech();
+  } = useSpeech({ volume });
 
   /**
    * Triggers speech. Speech is only triggered when:
