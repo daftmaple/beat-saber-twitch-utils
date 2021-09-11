@@ -42,17 +42,22 @@ export const TtsComponent = (props: Props): ReactElement<Props> => {
 
   return (
     <>
-      <Slider value={volumeValue} setValue={setVolumeValue} />
-      {!enabled ? (
-        <button
-          type="button"
-          onClick={() => {
-            setEnabled(true);
-          }}
-        >
-          Activate tts
-        </button>
-      ) : null}
+      <div>
+        {!enabled ? (
+          <button
+            type="button"
+            onClick={() => {
+              setEnabled(true);
+            }}
+          >
+            Activate tts
+          </button>
+        ) : null}
+      </div>
+      <div>
+        <Slider value={volumeValue} setValue={setVolumeValue} />
+        Volume: {volumeValue}
+      </div>
     </>
   );
 };
