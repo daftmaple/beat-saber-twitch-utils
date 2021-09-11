@@ -18,7 +18,7 @@ type TmiTransformReturnType<T> = T extends Transformable<infer RT>
   ? ReturnType<Transformable<RT>['transform']>
   : never;
 
-export type TmiHandlerType<T> = (args: TmiTransformReturnType<T>) => void;
+type TmiHandlerType<T> = (args: TmiTransformReturnType<T>) => void;
 
 /**
  * Twitch Chat client

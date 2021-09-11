@@ -1,4 +1,7 @@
-import { ReactElement, useEffect, useState } from 'react';
+import { debounce } from 'lodash';
+import { ReactElement, useCallback, useEffect, useState } from 'react';
+
+import { Slider } from '../slider';
 
 import { useLinker } from './hook/linker';
 
@@ -13,6 +16,8 @@ export const TtsComponent = (props: Props): ReactElement<Props> => {
 
   const [enabled, setEnabled] = useState<boolean>(false);
   const [client, setClient] = useState<TwitchChat>(new TwitchChat(channel));
+  const [volume, setVolume] = useState<number>(1);
+  const [volumeValue, setVolumeValue] = useState<number>(volume * 100);
 
   useEffect(() => {
     client.connect();
@@ -23,10 +28,21 @@ export const TtsComponent = (props: Props): ReactElement<Props> => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [channel]);
 
-  useLinker({ enabled, client });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const volumeDebouncer = useCallback(
+    debounce((newVolume: number) => setVolume(newVolume), 300),
+    [setVolume],
+  );
+
+  useEffect(() => {
+    volumeDebouncer(volumeValue / 100);
+  }, [volumeDebouncer, volumeValue]);
+
+  useLinker({ enabled, client, volume });
 
   return (
     <>
+      <Slider value={volumeValue} setValue={setVolumeValue} />
       {!enabled ? (
         <button
           type="button"

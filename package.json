@@ -1,7 +1,7 @@
 {
   "name": "twitch-chat",
   "description": "Twitch Chat utilities",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "author": "daftmaple",
   "scripts": {
@@ -23,7 +23,7 @@
     ]
   },
   "dependencies": {
-    "@types/tmi.js": "1.7.2",
+    "lodash": "4.17.21",
     "next": "11.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
@@ -32,9 +32,11 @@
   "devDependencies": {
     "@commitlint/cli": "13.1.0",
     "@commitlint/config-conventional": "13.1.0",
+    "@types/lodash": "4.14.172",
     "@types/node": "14.17.12",
     "@types/react": "17.0.19",
     "@types/react-dom": "17.0.9",
+    "@types/tmi.js": "1.7.2",
     "@typescript-eslint/eslint-plugin": "4.29.3",
     "@typescript-eslint/parser": "4.29.3",
     "commitizen": "4.2.4",
