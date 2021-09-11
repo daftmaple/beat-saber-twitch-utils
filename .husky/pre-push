@@ -1,0 +1,16 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+yarn browserslist > browserslist.txt
+sed -i '1,2d;$d' browserslist.txt
+
+if [[ -z $(git status -s "browserslist.txt") ]]
+then
+  echo "No changes from browserslist. Proceeds to push"
+  exit
+else
+  echo "Found a change on browserslist. Doing automatic commit"
+  git add browserslist.txt
+  git commit -m 'chore(browserslist): update browserslist'
+  exit
+fi
