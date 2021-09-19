@@ -8,6 +8,7 @@ module.exports = {
       jsx: true,
     },
     ecmaVersion: 2019,
+    project: './tsconfig.json',
     sourceType: 'module',
   },
   globals: {
@@ -15,7 +16,16 @@ module.exports = {
     SharedArrayBuffer: 'readonly',
   },
   plugins: ['import', 'jsx-a11y', 'react', 'react-hooks', 'prettier'],
-  extends: ['airbnb', 'prettier', 'next', 'next/core-web-vitals'],
+  extends: [
+    'airbnb',
+    'airbnb/hooks',
+    'airbnb-typescript',
+    'prettier',
+    'next',
+    'next/core-web-vitals',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
+  ],
   rules: {
     'prettier/prettier': 'error',
     camelcase: 'off',
@@ -60,29 +70,7 @@ module.exports = {
       },
     ],
   },
-  overrides: [
-    {
-      files: '**/*.+(ts|tsx)',
-      parser: '@typescript-eslint/parser',
-      plugins: ['@typescript-eslint/eslint-plugin'],
-      extends: ['plugin:@typescript-eslint/recommended', 'prettier'],
-      rules: {
-        '@typescript-eslint/explicit-function-return-type': 'off',
-        '@typescript-eslint/explicit-module-boundary-types': 'off',
-        'no-use-before-define': [0],
-        '@typescript-eslint/no-use-before-define': [1],
-        '@typescript-eslint/no-explicit-any': 'off',
-        '@typescript-eslint/no-var-requires': 'off',
-        '@typescript-eslint/quotes': [
-          2,
-          'backtick',
-          {
-            avoidEscape: true,
-          },
-        ],
-      },
-    },
-  ],
+  overrides: [],
   settings: {
     'import/resolver': {
       typescript: {

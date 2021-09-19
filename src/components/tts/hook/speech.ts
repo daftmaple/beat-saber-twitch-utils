@@ -43,6 +43,7 @@ export const useSpeech = (props: Props) => {
   useEffect(() => {
     if (typeof window !== `undefined` && window.speechSynthesis) {
       setCanSpeak(true);
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       getSpeeches();
     }
   }, []);
