@@ -55,7 +55,7 @@ export const TtsComponent = (props: Props): ReactElement<Props> => {
         ) : null}
       </div>
       <div>
-        <Slider value={volumeValue} setValue={setVolumeValue} />
+        <Slider setValue={setVolumeValue} value={volumeValue} />
         Volume: {volumeValue}
       </div>
     </>

@@ -9,10 +9,10 @@ export default function Home() {
       <Head>
         <title>TypeScript starter for Next.js</title>
         <meta
-          name="description"
           content="TypeScript starter for Next.js that includes all you need to build amazing apps"
+          name="description"
         />
-        <link rel="icon" href="/favicon.ico" />
+        <link href="/favicon.ico" rel="icon" />
       </Head>
 
       <main className={styles.main}>
@@ -28,27 +28,27 @@ export default function Home() {
         <p className={styles.description}>This is not an official starter!</p>
 
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
+          <a className={styles.card} href="https://nextjs.org/docs">
             <h2>Documentation &rarr;</h2>
             <p>Find in-depth information about Next.js features and API.</p>
           </a>
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
+          <a className={styles.card} href="https://nextjs.org/learn">
             <h2>Learn &rarr;</h2>
             <p>Learn about Next.js in an interactive course with quizzes!</p>
           </a>
 
           <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
             className={styles.card}
+            href="https://github.com/vercel/next.js/tree/master/examples"
           >
             <h2>Examples &rarr;</h2>
             <p>Discover and deploy boilerplate example Next.js projects.</p>
           </a>
 
           <a
-            href="https://vercel.com/new?utm_source=typescript-nextjs-starter"
             className={styles.card}
+            href="https://vercel.com/new?utm_source=typescript-nextjs-starter"
           >
             <h2>Deploy &rarr;</h2>
             <p>
@@ -61,12 +61,12 @@ export default function Home() {
       <footer className={styles.footer}>
         <a
           href="https://vercel.com?utm_source=typescript-nextjs-starter"
-          target="_blank"
           rel="noopener noreferrer"
+          target="_blank"
         >
           Powered by{` `}
           <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+            <Image alt="Vercel Logo" height={16} src="/vercel.svg" width={72} />
           </span>
         </a>
       </footer>
