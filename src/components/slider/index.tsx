@@ -17,7 +17,7 @@ export const Slider = (props: Props): ReactElement => {
 
   return (
     <div>
-      <input type="range" min={0} max={100} value={value} onChange={onChange} />
+      <input max={100} min={0} type="range" value={value} onChange={onChange} />
     </div>
   );
 };

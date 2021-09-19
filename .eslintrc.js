@@ -36,6 +36,16 @@ module.exports = {
     'react/no-unused-prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/require-default-props': 'off',
+    'react/jsx-sort-props': [
+      'error',
+      {
+        callbacksLast: true, // Does not work for functional component
+        shorthandFirst: true,
+        shorthandLast: false,
+        ignoreCase: true,
+        reservedFirst: true,
+      },
+    ],
     '@typescript-eslint/no-unused-vars': [
       'error',
       { varsIgnorePattern: '^_.*' },
