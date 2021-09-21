@@ -24,7 +24,7 @@ export const ExportConfigurationButton = (
   }, [config]);
 
   return (
-    <a href={configHref} download="twitchchat-config.json">
+    <a download="twitchchat-config.json" href={configHref}>
       <button type="button">Export configuration</button>
     </a>
   );

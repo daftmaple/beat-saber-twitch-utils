@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 import { ConfigurationV1 } from '../type';
 
@@ -36,8 +36,8 @@ export const ImportConfigurationButton = (
 
   return (
     <div>
-      <input type="file" onChange={handleFileInput} accept="application/json" />
-      <button onClick={onClick} type="button">
+      <input accept="application/json" type="file" onChange={handleFileInput} />
+      <button type="button" onClick={onClick}>
         Load configuration
       </button>
     </div>

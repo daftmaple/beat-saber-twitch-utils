@@ -11,6 +11,7 @@ module.exports = {
     project: './tsconfig.json',
     sourceType: 'module',
   },
+  ignorePatterns: ['*.js'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -46,6 +47,7 @@ module.exports = {
         reservedFirst: true,
       },
     ],
+    '@typescript-eslint/explicit-module-boundary-types': ['off'],
     '@typescript-eslint/no-unused-vars': [
       'error',
       { varsIgnorePattern: '^_.*' },

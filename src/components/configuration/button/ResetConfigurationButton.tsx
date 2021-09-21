@@ -16,7 +16,7 @@ export const ResetConfigurationButton = (
   };
 
   return (
-    <button onClick={onClick} type="button">
+    <button type="button" onClick={onClick}>
       Reset local configuration
     </button>
   );
