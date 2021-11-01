@@ -2,9 +2,9 @@ import { cloneDeep } from 'lodash';
 
 import { ConfigurationV1, defaultConfiguration } from '../type';
 
-type ResetConfigurationButtonProps = {
+interface ResetConfigurationButtonProps {
   setConfig: (config: ConfigurationV1) => void;
-};
+}
 
 export const ResetConfigurationButton = (
   props: ResetConfigurationButtonProps,

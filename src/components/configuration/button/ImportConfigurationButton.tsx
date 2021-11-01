@@ -2,9 +2,9 @@ import { ChangeEvent, useState } from 'react';
 
 import { ConfigurationV1 } from '../type';
 
-type ImportConfigurationButtonProps = {
+interface ImportConfigurationButtonProps {
   setConfig: (config: ConfigurationV1) => void;
-};
+}
 
 export const ImportConfigurationButton = (
   props: ImportConfigurationButtonProps,

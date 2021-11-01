@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 
 import { ConfigurationV1, defaultConfiguration } from '../type';
 
-type ExportConfigurationButtonProps = {
+interface ExportConfigurationButtonProps {
   config: ConfigurationV1 | null;
-};
+}
 
 const parseHref = (config: ConfigurationV1): string =>
   `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(config))}`;
