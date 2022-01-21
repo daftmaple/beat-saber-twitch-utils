@@ -42,6 +42,10 @@ export class BeatSaberWebsocket {
       if (data.event === 'resume') {
         this.resumePauseHandler?.(false);
       }
+
+      if (data.event === 'hello' && data.status.beatmap) {
+        this.bpmChangeHandler?.(data.status.beatmap.songBPM);
+      }
     });
 
     this.conn.addEventListener('close', () => {
