@@ -2,12 +2,13 @@ import { useRouter } from 'next/router';
 import { ReactElement } from 'react';
 
 import { BeatGifComponent } from '~/components/beatGif';
+import { images } from '~/config/images';
 import { routeHandler, queryHandler } from '~/utils/bs-websocket';
 
-const Gif = (): ReactElement => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { query } = useRouter();
+const Gif = (): ReactElement | Promise<boolean> => {
+  const router = useRouter();
 
+  const { query } = router;
   const { slug } = query;
 
   const {
@@ -18,11 +19,17 @@ const Gif = (): ReactElement => {
 
   const gifName = routeHandler(slug);
 
-  return (
-    <>
-      <BeatGifComponent debug={debug} gifName={gifName} ip={ip} port={port} />
-    </>
-  );
+  const imageResult = images.filter((i) => i.gifName === gifName);
+
+  if (imageResult.length !== 0) {
+    return (
+      <>
+        <BeatGifComponent debug={debug} gifName={gifName} ip={ip} port={port} />
+      </>
+    );
+  }
+
+  return router.push('/404');
 };
 
 export default Gif;
