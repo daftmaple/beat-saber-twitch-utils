@@ -46,6 +46,7 @@ type ImageConfig = {
   spritesheetLocation: string;
 };
 
+// 5.72s per 13 beats
 const catJAM: ImageConfig = {
   gifName: 'catjam',
   width: 112,
@@ -57,15 +58,28 @@ const catJAM: ImageConfig = {
   spritesheetLocation: '/images/catjam.png',
 };
 
+// 280ms per beat
 const AYAYAJAM: ImageConfig = {
   gifName: 'ayayajam',
   width: 112,
   height: 112,
   spritesheetWidth: 784,
-  originalBpm: 215,
-  originalTimeLength: 0.27907,
+  originalBpm: 214.28571,
+  originalTimeLength: 0.28,
   offsetMs: 0,
   spritesheetLocation: '/images/ayayajam.png',
 };
 
-export const images = [catJAM, AYAYAJAM];
+// 400ms per beat
+const Sabering: ImageConfig = {
+  gifName: 'sabering',
+  width: 112,
+  height: 112,
+  spritesheetWidth: 896,
+  originalBpm: 150,
+  originalTimeLength: 0.4,
+  offsetMs: 0,
+  spritesheetLocation: '/images/sabering.png',
+};
+
+export const images = [catJAM, AYAYAJAM, Sabering];

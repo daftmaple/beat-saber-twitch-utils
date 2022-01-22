@@ -6,7 +6,6 @@ import { images } from '~/config/images';
 import { routeHandler, queryHandler } from '~/utils/bs-websocket';
 
 const Gif = (): ReactElement | Promise<boolean> => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter();
 
   const { query } = router;
